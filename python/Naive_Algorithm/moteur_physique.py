@@ -1,10 +1,14 @@
+import numpy as np
+
 def reinitialiser_forces(systeme): 
     """Remet à zéro les vecteurs forces de chaque corp avant le calcul du pas courant
 
     Args:
         systeme (n_body_system): état courant du système
     """
-    return
+    for particule in systeme.particles :
+        particule.force = np.zeros(3)
+    return 
 
 def calculer_force_paire(particule_A, particule_B, softening):
     """Calcule la force d'attraction gravitationnelle exercée par B sur A (vectoriellement) en appliquant le paramètre d'adoucissement
