@@ -1,5 +1,8 @@
 import numpy as np
 
+global G
+G = 3.667 # Constante gravitationnelle
+
 def reinitialiser_forces(systeme): 
     """Remet à zéro les vecteurs forces de chaque corp avant le calcul du pas courant
 
@@ -18,7 +21,13 @@ def calculer_force_paire(particule_A, particule_B, softening):
         particule_B (Particle): état courant de la particule
         softening (float): parametre d'adoucissement gravitationnel
     """
-    return
+    # Vecteur AB
+    r_ab = particule_B.position - particule_A.position
+    # Norme de la force
+    facteur_force = G * particule_A.mass * particule_B.mass / ((np.sqrt(np.sum(r_ab)**2 + softening**2))**3)
+    # Force gravitationnelle
+    force = facteur_force * r_ab
+    return force
 
 def calculer_toutes_les_forces(systeme):
     """Double boucle imbriquée qui parcourt toutes les paires distinctes (i,j) pour faire la somme des forces subies par chaque particule
