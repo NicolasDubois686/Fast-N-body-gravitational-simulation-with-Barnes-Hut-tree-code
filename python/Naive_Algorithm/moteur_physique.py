@@ -35,4 +35,16 @@ def calculer_toutes_les_forces(systeme):
     Args:
         systeme (n_body_system): état courant du système
     """
+    # Remise à 0 des forces subies
+    reinitialiser_forces(systeme)
+    # Calcul des forces
+    for objet1 in systeme.particules :
+        resultante = np.zeros(3)
+        for objet2 in systeme.particules : 
+            if objet1.id != objet2.id :
+                resultante += calculer_force_paire(objet1, objet2, systeme.softening)
+        objet1.force = resultante
+    """
+    Optimisation : réciprocité des forces => UTILISER ID    
+    """        
     return 
