@@ -37,14 +37,14 @@ def calculer_toutes_les_forces(systeme):
     """
     # Remise à 0 des forces subies
     reinitialiser_forces(systeme)
-    # Calcul des forces
-    for objet1 in systeme.particules :
-        resultante = np.zeros(3)
-        for objet2 in systeme.particules : 
-            if objet1.id != objet2.id :
-                resultante += calculer_force_paire(objet1, objet2, systeme.softening)
-        objet1.force = resultante
-    """
-    Optimisation : réciprocité des forces => UTILISER ID    
-    """        
+    
+    n = len (systeme.particules)
+    for i in range(n) : 
+        objet_i = systeme.particules[i]
+        for j in range(i+1, n) :
+            objet_j = systeme.particules[j]
+            F_ij = calculer_force_paire(objet_i, objet_j, systeme.softening)
+            objet_i.force += F_ij
+            objet_j.force += -F_ij
+            
     return 
