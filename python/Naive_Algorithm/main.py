@@ -1,4 +1,8 @@
 import numpy as np
+from initialisation import *
+from affichage import *
+from moteur_physique import *
+from integrateur_numerique import *
 
 """
 Structure des données Particules 
@@ -17,18 +21,37 @@ Structure des Corps :
 
 """
         
-class Particle:
-    def __init__(self, position, velocity, mass, id, radius):
-        self.position = position # np.array
-        self.velocity = velocity # np.array
-        self.force    = np.zeros(3)
-        self.mass     = mass 
-        self.id       = id
-        self.radius   = radius
-        
-class n_body_system:
-    def __init__(self, particules, dt, softening):
-        self.particles = particules
-        self.dt        = dt
-        self.softening = softening
-        
+#############################
+# Initialisation du système #
+#############################
+
+systeme = n_body_system(
+    particules = np.array([]),
+    dt         = 0.1,
+    softening  = 0.1
+)
+
+LARGEUR = 1280
+HAUTEUR = 720
+DUREE   = 1000
+
+camera = Camera3D(
+    screen_width  = LARGEUR,
+    screen_height = HAUTEUR,
+    focal_length  = 600
+)
+
+ecran = init_fenetre_rendu(LARGEUR, HAUTEUR, titre="Simulation N-corps - Plummer 3D")
+clock = pygame.time.Clock()
+
+init_systeme_Plummer(systeme, 3, 3, 1, G)
+
+afficher_particules_3d(systeme, camera, ecran)
+
+t = 0
+while t < DUREE :
+    calculer_toutes_les_forces(systeme)
+    mettre_a_jour_position_et_vitesse(systeme)
+    afficher_particules_3d(systeme, camera, ecran)
+    t += systeme.dt
+    
