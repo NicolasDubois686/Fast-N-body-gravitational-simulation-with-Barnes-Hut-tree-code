@@ -1,4 +1,5 @@
 import numpy as np
+import pygame
 
 class Camera2D:
     def __init__(self, target_x=0.0, target_y=0.0, zoom=1.0):
@@ -13,13 +14,27 @@ class Camera3D:
         self.up = np.array([0.0, 1.0, 0.0])           # Le vecteur "Haut" pour s'orienter
         self.fov = 45.0                               # Champ de vision en degrés (Field of View)
 
-def init_fenetre_rendu(largeur, hauteur):
-    """Initialise la fenêtre graphique Pygame/VisPy
+def init_fenetre(largeur, hauteur, titre = "Simulation N-corps", icon = None):
+    """Initialise la fenêtre graphique Pygame
 
     Args:
-        largeur (float): largeur de la fenêtre d'affichage
-        hauteur (float): hauteur de la fenêtre d'affichage
+        largeur (int): largeur de la fenêtre d'affichage
+        hauteur (int): hauteur de la fenêtre d'affichage
+        titre   (str): titre de la fenêtre d'affichage
+        icon    (str): chemin d'accès vers l'icon de la page, par défaut il n'y en a pas
     """
+    pygame.init()
+    # dimmensions de la fenêtre (largeur x hauteur)
+    ecran = pygame.display.set_mode((largeur, hauteur))
+    # titre de la fenêtre
+    pygame.display.set_caption(titre)
+    # icone de la fenêtre
+    if icon is not None :
+        image = pygame.image.load(icon).convert()
+        pygame.display.set_icon(image)
+    # Contrôle de la vitesse d'affichage
+    clock = pygame.time.Clock()
+    return (ecran, clock)
     
 def afficher_particules(systeme, camera):
     """Projecte les coordonnées 3D en 2D des particules 
