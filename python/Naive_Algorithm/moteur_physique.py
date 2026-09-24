@@ -24,7 +24,7 @@ def calculer_force_paire(particule_A, particule_B, softening):
     # Vecteur AB
     r_ab = particule_B.position - particule_A.position
     # Norme de la force
-    facteur_force = G * particule_A.mass * particule_B.mass / ((np.sqrt(np.sum(r_ab)**2 + softening**2))**3)
+    facteur_force = G * particule_A.mass * particule_B.mass / ((np.sqrt(np.sum(r_ab**2) + softening**2))**3)
     # Force gravitationnelle
     force = facteur_force * r_ab
     return force
