@@ -16,18 +16,6 @@ Structure des Corps :
 
 
 """
-
-class Particle:
-    def __init__(self, position, velocity, mass, id):
-        self.position = position # np.array
-        self.velocity = velocity # np.array
-        self.force    = np.zeros(3)
-        self.mass     = mass 
-        self.id       = id
         
-class n_body_system:
-    def __init__(self, particules, dt, softening):
-        self.particles = particules
-        self.dt        = dt
-        self.softening = softening
+
         
