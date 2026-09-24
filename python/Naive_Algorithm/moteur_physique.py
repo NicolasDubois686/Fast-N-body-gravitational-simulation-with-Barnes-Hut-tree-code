@@ -1,7 +1,7 @@
 import numpy as np
 
 global G
-G = 3.667 # Constante gravitationnelle
+G = 1 # Constante gravitationnelle
 
 def reinitialiser_forces(systeme): 
     """Remet à zéro les vecteurs forces de chaque corp avant le calcul du pas courant
