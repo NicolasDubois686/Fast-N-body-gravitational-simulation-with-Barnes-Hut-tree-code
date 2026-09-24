@@ -1,18 +1,6 @@
 import numpy as np
+from main import n_body_system, Particle
 
-class Particle:
-    def __init__(self, position, velocity, mass, id):
-        self.position = position # np.array
-        self.velocity = velocity # np.array
-        self.force    = np.zeros(3)
-        self.mass     = mass 
-        self.id       = id
-        
-class n_body_system:
-    def __init__(self, particules, dt, softening):
-        self.particles = particules
-        self.dt        = dt
-        self.softening = softening
 
 def init_systeme_Plummer(systeme, nb_particules, M_tot, a, G, dt, softening):
     """Alloue la mémoire nécessaire pour le tableau de particules avec la méthode de Plummer et définit les constantes physiques globales 
@@ -34,7 +22,8 @@ def init_systeme_Plummer(systeme, nb_particules, M_tot, a, G, dt, softening):
             position = np.zeros(3),
             velocity = np.zeros(3),
             mass     = masse_particule,
-            id       = i
+            id       = i,
+            a        = 1
         )
         # génération de la position (r, theta, phi)
         u1 = np.random.uniform(0, 1)
