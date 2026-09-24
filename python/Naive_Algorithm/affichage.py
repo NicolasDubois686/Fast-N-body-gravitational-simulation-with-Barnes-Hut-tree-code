@@ -18,7 +18,6 @@ class Camera3D:
         self.y = 0.0
         self.z = -1000.0  # Reculée le long de l'axe Z pour observer la scène
 
-
 def projeter_3d_vers_2d(pos_3d, camera):
     """Projette un point (X, Y, Z) du monde physique vers les coordonnées écran (px, py).
 
@@ -43,6 +42,27 @@ def projeter_3d_vers_2d(pos_3d, camera):
 
     return px, py, echelle
 
+def init_fenetre_rendu(largeur, hauteur, titre="Simulation N-corps", icon=None):
+    """Initialise la fenêtre graphique Pygame.
+
+    Args:
+        largeur (int): largeur de la fenêtre en pixels
+        hauteur (int): hauteur de la fenêtre en pixels
+        titre (str, optional): titre de la fenêtre.
+        icon (str, optional): chemin vers le fichier image de l'icône.
+    """
+    pygame.init()
+    
+    # Conversion explicite en int pour Pygame
+    ecran = pygame.display.set_mode((int(largeur), int(hauteur)))
+    pygame.display.set_caption(titre)
+    
+    # On ne charge l'icône que si un chemin a été fourni
+    if icon is not None:
+        image = pygame.image.load(icon).convert()
+        pygame.display.set_icon(image)
+        
+    return ecran
 
 def afficher_particules_3d(systeme, camera, ecran):
     """Affiche les particules du système avec effet de perspective et gestion de profondeur.

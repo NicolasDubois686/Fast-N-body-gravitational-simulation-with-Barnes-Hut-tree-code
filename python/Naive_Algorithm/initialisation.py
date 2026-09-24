@@ -1,8 +1,21 @@
 import numpy as np
-from main import n_body_system, Particle
 
+class Particle:
+    def __init__(self, position, velocity, mass, id, radius):
+        self.position = position # np.array
+        self.velocity = velocity # np.array
+        self.force    = np.zeros(3)
+        self.mass     = mass 
+        self.id       = id
+        self.radius   = radius
+        
+class n_body_system:
+    def __init__(self, particules, dt, softening):
+        self.particles = particules
+        self.dt        = dt
+        self.softening = softening
 
-def init_systeme_Plummer(systeme, nb_particules, M_tot, a, G, dt, softening):
+def init_systeme_Plummer(systeme, nb_particules, M_tot, a, G):
     """Alloue la mémoire nécessaire pour le tableau de particules avec la méthode de Plummer et définit les constantes physiques globales 
 
     Args:
@@ -23,7 +36,7 @@ def init_systeme_Plummer(systeme, nb_particules, M_tot, a, G, dt, softening):
             velocity = np.zeros(3),
             mass     = masse_particule,
             id       = i,
-            a        = 1
+            radius   = 1
         )
         # génération de la position (r, theta, phi)
         u1 = np.random.uniform(0, 1)
@@ -64,7 +77,7 @@ def init_systeme_Plummer(systeme, nb_particules, M_tot, a, G, dt, softening):
         objet.velocity = np.array([vx, vy, vz])
         
         # Ajout au systeme
-        systeme.particles.append(objet)
+        systeme.particles = np.append(systeme.particles, objet)
     return
 
 def init_systeme_Kuzmin(nb_particules, dt, sftening):
@@ -84,15 +97,5 @@ def init_systeme_Navarro_Frenk_White(nb_particules, dt, sftening):
         nb_particules (int): nombre de corps
         dt (float): pas de temps
         sftening (float): parametre d'adoucissement gravitationnel
-    """
-    return
-
-def generer_disque_plummer(system, rayon_galaxie, masse_totale):
-    """Initialise les positions et les vitesses des corps selon une distribution de Plummer ou un disque en rotation képlérienne (pour obtenir une galaxie stable)
-
-    Args:
-        system (n_body_system): état courant du système
-        rayon_galaxie (float): 
-        masse_totale (float): 
     """
     return

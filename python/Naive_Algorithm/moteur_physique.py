@@ -38,11 +38,11 @@ def calculer_toutes_les_forces(systeme):
     # Remise à 0 des forces subies
     reinitialiser_forces(systeme)
     
-    n = len (systeme.particules)
+    n = len (systeme.particles)
     for i in range(n) : 
-        objet_i = systeme.particules[i]
+        objet_i = systeme.particles[i]
         for j in range(i+1, n) :
-            objet_j = systeme.particules[j]
+            objet_j = systeme.particles[j]
             F_ij = calculer_force_paire(objet_i, objet_j, systeme.softening)
             objet_i.force += F_ij
             objet_j.force += -F_ij

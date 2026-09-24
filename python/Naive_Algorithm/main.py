@@ -34,6 +34,7 @@ systeme = n_body_system(
 LARGEUR = 1280
 HAUTEUR = 720
 DUREE   = 1000
+NB_PARTICLES = 15
 
 camera = Camera3D(
     screen_width  = LARGEUR,
@@ -44,7 +45,7 @@ camera = Camera3D(
 ecran = init_fenetre_rendu(LARGEUR, HAUTEUR, titre="Simulation N-corps - Plummer 3D")
 clock = pygame.time.Clock()
 
-init_systeme_Plummer(systeme, 3, 3, 1, G)
+init_systeme_Plummer(systeme, NB_PARTICLES, 3, 1, G)
 
 afficher_particules_3d(systeme, camera, ecran)
 
@@ -54,4 +55,5 @@ while t < DUREE :
     mettre_a_jour_position_et_vitesse(systeme)
     afficher_particules_3d(systeme, camera, ecran)
     t += systeme.dt
-    
+
+pygame.quit()
