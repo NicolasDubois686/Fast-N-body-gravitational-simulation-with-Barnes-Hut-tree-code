@@ -54,13 +54,12 @@ def init_systeme_Plummer(systeme, nb_particules, M_tot, a, G):
         v = np.sqrt(2 * G * M_tot / np.sqrt(r**2 + a**2))
         
         # Méthode de rejet pour trouver le facteur q = v / v_e
-        q = np.random.uniform(0, 1)
-        g = q**2 * (1 - q**2)**3.5
-        test = np.random.uniform(0, 0.1)
-        while test >= g :
+        while True :
             q = np.random.uniform(0, 1)
             g = q**2 * (1 - q**2)**3.5
             test = np.random.uniform(0, 0.1)
+            if test <= g:
+                break
         
         norme_v = q * v
         
