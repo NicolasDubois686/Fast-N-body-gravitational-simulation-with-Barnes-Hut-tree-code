@@ -22,14 +22,8 @@ Structure des Corps :
 """
         
 #############################
-# Initialisation du système #
+# Définition des constantes #
 #############################
-
-systeme = n_body_system(
-    particules = np.array([]),
-    dt         = 0.05,
-    softening  = 0.5
-)
 
 LARGEUR = 1580
 HAUTEUR = 720
@@ -40,6 +34,10 @@ SUB_STEPS = 10
 a = 10
 M_tot = 10
 
+############################
+# Initialisation affichage #
+############################
+
 camera = Camera3D(
     screen_width  = LARGEUR,
     screen_height = HAUTEUR,
@@ -49,7 +47,21 @@ camera = Camera3D(
 ecran = init_fenetre_rendu(LARGEUR, HAUTEUR, titre="Simulation N-corps - Plummer 3D")
 clock = pygame.time.Clock()
 
+#############################
+# Initialisation du système #
+#############################
+
+systeme = n_body_system(
+    particules = np.array([]),
+    dt         = 0.05,
+    softening  = 0.5
+)
+
 init_systeme_Plummer(systeme, NB_PARTICLES, M_tot, a, G)
+
+#############################
+#     N-corps Algorithm     #
+#############################
 
 afficher_particules_3d(systeme, camera, ecran)
 
