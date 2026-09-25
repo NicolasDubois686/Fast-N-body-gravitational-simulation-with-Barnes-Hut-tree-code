@@ -25,13 +25,13 @@ Structure des Corps :
 # Définition des constantes #
 #############################
 
-LARGEUR = 1580
+LARGEUR = 1380
 HAUTEUR = 720
 DUREE   = 10000
-NB_PARTICLES = 10
+NB_PARTICLES = 15
 SUB_STEPS = 10
 
-a = 10
+a = 15
 M_tot = 10
 
 ############################
@@ -74,7 +74,7 @@ while (t < DUREE and simulation_active) :
         t += systeme.dt
     nb_in_screen = afficher_particules_3d(systeme, camera, ecran)
     clock.tick(60)
-    if nb_in_screen < 2 * NB_PARTICLES / 3 :
+    if nb_in_screen <= 2 * NB_PARTICLES / 3 :
         simulation_active = False
     for event in pygame.event.get() :
         if event.type == pygame.QUIT:

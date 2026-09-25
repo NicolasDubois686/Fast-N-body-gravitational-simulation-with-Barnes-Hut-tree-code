@@ -41,7 +41,7 @@ def projeter_3d_vers_2d(pos_3d, camera):
     py = int(-rel_y * echelle + camera.center_y)  # Inversion de l'axe Y pour Pygame
 
     # Vérifie si une particule est visible par la caméra
-    largeur_ecran = camera.center_x *2
+    largeur_ecran = camera.center_x * 2
     hauteur_ecran = camera.center_y * 2
     in_screen = False
 
