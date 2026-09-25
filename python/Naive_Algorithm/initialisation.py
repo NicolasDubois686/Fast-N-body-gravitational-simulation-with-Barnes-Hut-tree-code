@@ -28,15 +28,20 @@ def init_systeme_Plummer(systeme, nb_particules, M_tot, a, G):
         softening (float): parametre d'adoucissement gravitationnel
     """
     
+    liste_alea = [int(np.random.uniform(0,100)) for i in range(nb_particules)]
+    tot = sum(liste_alea)
+    liste_masse = [M_tot * (liste_alea[i] / tot) for i in range(nb_particules)]
+        
+    
     masse_particule = M_tot / nb_particules
     
     for i in range(nb_particules):
         objet = Particle(
             position = np.zeros(3),
             velocity = np.zeros(3),
-            mass     = masse_particule,
+            mass     = liste_masse[i],
             id       = i,
-            radius   = 1
+            radius   = int(liste_masse[i])
         )
         # génération de la position (r, theta, phi)
         u1 = np.random.uniform(0, 1)
