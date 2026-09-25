@@ -1,4 +1,7 @@
-# Fast-N-body-gravitational-simulation-with-Barnes-Hut-tree-code
+# Fast N-body gravitational simulation with Barnes Hut tree code
+## Python
+### Naive algorithm
+### Barnes Hut algorithm
 
 ## Sources
 https://idl.uw.edu/living-papers-paper/barnes-hut/
