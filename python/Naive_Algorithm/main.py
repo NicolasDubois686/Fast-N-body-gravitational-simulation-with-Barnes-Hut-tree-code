@@ -65,13 +65,22 @@ init_systeme_Plummer(systeme, NB_PARTICLES, M_tot, a, G)
 
 afficher_particules_3d(systeme, camera, ecran)
 
+simulation_active = True
 t = 0
-while t < DUREE :
+while (t < DUREE and simulation_active) :
     for _ in range(SUB_STEPS):
         calculer_toutes_les_forces(systeme)
         mettre_a_jour_position_et_vitesse(systeme)
         t += systeme.dt
-    afficher_particules_3d(systeme, camera, ecran)
+    nb_in_screen = afficher_particules_3d(systeme, camera, ecran)
     clock.tick(60)
+    if nb_in_screen < 2 * NB_PARTICLES / 3 :
+        simulation_active = False
+    for event in pygame.event.get() :
+        if event.type == pygame.QUIT:
+            simulation_active = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_q :
+                simulation_active = False
 
 pygame.quit()

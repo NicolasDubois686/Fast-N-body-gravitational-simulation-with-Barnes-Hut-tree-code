@@ -40,7 +40,14 @@ def projeter_3d_vers_2d(pos_3d, camera):
     px = int(rel_x * echelle + camera.center_x)
     py = int(-rel_y * echelle + camera.center_y)  # Inversion de l'axe Y pour Pygame
 
-    return px, py, echelle
+    # Vérifie si une particule est visible par la caméra
+    largeur_ecran = camera.center_x *2
+    hauteur_ecran = camera.center_y * 2
+    in_screen = False
+
+    if 0 <= px <= largeur_ecran and 0 <= py <= hauteur_ecran :
+        in_screen = True
+    return px, py, echelle, in_screen
 
 def init_fenetre_rendu(largeur, hauteur, titre="Simulation N-corps", icon=None):
     """Initialise la fenêtre graphique Pygame.
@@ -84,13 +91,18 @@ def afficher_particules_3d(systeme, camera, ecran):
         systeme.particles, key=lambda p: p.position[2], reverse=True
     )
 
+    nb_in_screen = 0
+    
     # 3. Projection et rendu de chaque particule
     for p in particules_triees:
         res = projeter_3d_vers_2d(p.position, camera)
         if res is None:
             continue
 
-        px, py, echelle = res
+        px, py, echelle, in_screen = res
+        
+        if in_screen :
+            nb_in_screen += 1
 
         # Rayon physique (par défaut à 2.0 si non spécifié sur la particule)
         rayon_physique = p.radius
@@ -112,3 +124,5 @@ def afficher_particules_3d(systeme, camera, ecran):
 
     # 4. Rafraîchissement du tampon d'affichage
     pygame.display.flip()
+    return nb_in_screen
+    
