@@ -20,9 +20,9 @@ La densité centrale est constante sans qu'il n'y ait de singularité : $\rho(0)
 ### Barnes Hut algorithm
 
 ## Sources
-https://idl.uw.edu/living-papers-paper/barnes-hut/
-https://www.cs.princeton.edu/courses/archive/fall03/cs126/assignments/barnes-hut.html
-https://people.engr.tamu.edu/sueda/courses/CSCE489/2020F/projects/Liam_Bessell/index.html
-https://dev.realworldocaml.org/
-https://en.wikipedia.org/wiki/Plummer_model
-https://patterns.eecs.berkeley.edu/?page_id=193
+https://idl.uw.edu/living-papers-paper/barnes-hut/ \
+https://www.cs.princeton.edu/courses/archive/fall03/cs126/assignments/barnes-hut.html \
+https://people.engr.tamu.edu/sueda/courses/CSCE489/2020F/projects/Liam_Bessell/index.html \
+https://dev.realworldocaml.org/ \
+https://en.wikipedia.org/wiki/Plummer_model \
+https://patterns.eecs.berkeley.edu/?page_id=193 
