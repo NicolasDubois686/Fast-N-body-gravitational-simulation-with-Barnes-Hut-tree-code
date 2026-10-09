@@ -14,6 +14,11 @@ class n_body_system:
         self.particles = particules
         self.dt        = dt
         self.softening = softening
+        
+    def pop(self):
+        ele = self.particles[0]
+        self.particles = self.particle.delete()
+        return ele
 
 def init_systeme_Plummer(systeme, nb_particules, M_tot, a, G):
     """Alloue la mémoire nécessaire pour le tableau de particules avec la méthode de Plummer et définit les constantes physiques globales 
