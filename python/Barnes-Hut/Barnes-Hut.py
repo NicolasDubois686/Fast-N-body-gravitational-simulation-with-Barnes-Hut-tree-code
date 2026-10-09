@@ -16,12 +16,49 @@ class Node:
 # Construction de l'algorithme #
 ################################
 
+def mesure_Bounding_Box(node):
+    """Indique les coordonnées des angles du cube formé par le noeur `Node`"""
+            
+    # Coordonnées des angles du cube du noeud
+    min_x = node.center[0] - Node.size/2
+    min_y = node.center[1] - Node.size/2
+    min_z = node.center[2] - Node.size/2
+    max_x = node.center[0] + Node.size/2
+    max_y = node.center[1] + Node.size/2
+    max_z = node.center[2] + Node.size/2
+    
+    return min_x, max_x, min_y, max_y, min_z, max_z
+
 def is_in_node(node, particle):
     """Indique si particle est dans node"""
-    return
+    
+    # Récupération des coordonnées du cube
+    min_x, max_x, min_y, max_y, min_z, max_z = mesure_Bounding_Box(node)
+    
+    # Vérification
+    return ((min_x <= particle.position[0] <= max_x) and
+            (min_y <= particle.position[1] <= max_y) and
+            (min_z <= particle.position[2] <= max_z))
 
 def cut_node(node):
     """Coupe le noeud en 8 noeud fils de tailles égales"""
+    
+    # Il faut que le cube ne soit pas encore scindé
+    assert(node.children == [None for _ in range(8)])
+    
+    new_size = node.size / 2
+    i = 0
+    for x in [1, -1]:
+        for y in [1, -1]:
+            for z in [1, -1]:
+                new_node = Node(
+                    center = [node.center[0] + x*new_size/2,
+                              node.center[1] + y*new_size/2,
+                              node.center[2] + z*new_size/2],
+                    size   = new_size
+                )
+                node.children[i] = new_node
+                i += 1
       
 def make_tree(node, system):
     """créer l'arbre des particules avec un algorithme de récursivité"""
